@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Creative Dispatch — Amaan Siddiqui</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --newsprint: #F0EBE0;
+    --ink: #1A1A1A;
+    --red: #C0392B;
+    --warm-gray: #8C8C8C;
+    --cream: #FAF7F2;
+    --rule: #1A1A1A;
+    --col-gap: 24px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--newsprint);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── TICKER ── */
+  .ticker-bar {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    padding: 6px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-inner span { margin: 0 40px; }
+  .ticker-inner .dot { color: var(--red); }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    border-top: 5px solid var(--ink);
+    border-bottom: 3px double var(--ink);
+    text-align: center;
+    padding: 18px 40px 14px;
+    position: relative;
+  }
+  .masthead-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 6px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--ink);
+  }
+  .masthead-title em { font-style: italic; color: var(--red); }
+  .masthead-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    color: var(--warm-gray);
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--ink);
+    margin-top: 12px;
+    padding-top: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    color: var(--warm-gray);
+  }
+  .masthead-meta .edition { color: var(--red); font-weight: 500; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--ink);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    padding: 9px 20px;
+    border-right: 1px solid #333;
+    transition: background .2s, color .2s;
+  }
+  nav a:first-child { border-left: 1px solid #333; }
+  nav a:hover { background: var(--red); color: #fff; }
+
+  /* ── LAYOUT WRAPPER ── */
+  .paper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-head {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 4px 0;
+    margin: 36px 0 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .section-head h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .section-head .rule-line {
+    flex: 1;
+    height: 1px;
+    background: var(--warm-gray);
+    opacity: .4;
+  }
+  .section-head .dateline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--warm-gray);
+  }
+
+  /* ── HERO GRID ── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0;
+    border-bottom: 2px solid var(--ink);
+    margin-top: 24px;
+  }
+  .hero-main {
+    grid-row: 1 / 3;
+    border-right: 1px solid var(--ink);
+    padding: 0 var(--col-gap) 24px 0;
+  }
+  .hero-side-top {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 0 var(--col-gap) 16px;
+  }
+  .hero-side-bottom {
+    border-right: 1px solid var(--ink);
+    padding: var(--col-gap) var(--col-gap) 16px;
+  }
+  .hero-far-top {
+    border-bottom: 1px solid var(--ink);
+    padding: 0 0 16px var(--col-gap);
+  }
+  .hero-far-bottom {
+    padding: var(--col-gap) 0 16px var(--col-gap);
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .headline-xl {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -.01em;
+    margin-bottom: 14px;
+  }
+  .headline-xl em { font-style: italic; }
+
+  .headline-lg {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .headline-md {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .body-copy {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #2a2a2a;
+  }
+  .body-copy p + p { margin-top: 10px; }
+
+  .byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .08em;
+    color: var(--warm-gray);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .byline strong { color: var(--ink); }
+
+  /* ── PROFILE PHOTO PLACEHOLDER ── */
+  .profile-frame {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #d4cfc6 0%, #b8b2a8 100%);
+    border: 2px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .profile-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,.04) 2px,
+      rgba(0,0,0,.04) 4px
+    );
+  }
+  .profile-frame .ph-icon {
+    font-size: 48px;
+    opacity: .35;
+    position: relative;
+    z-index: 1;
+  }
+  .profile-frame .ph-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: .5;
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .caption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    color: var(--warm-gray);
+    border-top: 1px solid var(--warm-gray);
+    padding-top: 5px;
+    margin-top: 4px;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 14px 0;
+    margin: 18px 0;
+    text-align: center;
+  }
+  .pull-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(17px, 2vw, 22px);
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .pull-quote cite {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    font-style: normal;
+    margin-top: 8px;
+  }
+
+  /* ── STAT BOXES ── */
+  .stat-box {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14px;
+    margin: 12px 0;
+  }
+  .stat-box .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-box .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: .7;
+    margin-top: 4px;
+  }
+
+  /* ── SERVICES GRID ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin: 20px 0;
+  }
+  .service-card {
+    padding: 20px 16px;
+    border-right: 1px solid var(--ink);
+    transition: background .2s;
+    cursor: default;
+    position: relative;
+  }
+  .service-card:last-child { border-right: none; }
+  .service-card:hover { background: var(--ink); }
+  .service-card:hover .service-title,
+  .service-card:hover .service-body,
+  .service-card:hover .service-icon { color: var(--cream); }
+  .service-icon {
+    font-size: 26px;
+    margin-bottom: 10px;
+    display: block;
+    transition: color .2s;
+  }
+  .service-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    color: var(--red);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    transition: color .2s;
+  }
+  .service-body {
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.6;
+    transition: color .2s;
+  }
+
+  /* ── PORTFOLIO REELS GRID ── */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin: 20px 0;
+  }
+  .portfolio-item {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .portfolio-item:nth-child(4n) { border-right: none; }
+  .portfolio-item:nth-last-child(-n+4) { border-bottom: none; }
+
+  /* 9:16 true Reels aspect ratio */
+  .p-thumb {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(135deg, #ccc 0%, #aaa 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s;
+  }
+  .portfolio-item:hover .p-thumb { transform: scale(1.03); }
+  .p-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 5px,
+      rgba(255,255,255,.05) 5px,
+      rgba(255,255,255,.05) 10px
+    );
+    pointer-events: none;
+  }
+  /* Play button overlay */
+  .p-play-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity .25s;
+    z-index: 3;
+  }
+  .portfolio-item:hover .p-play-overlay { opacity: 1; }
+  .p-play-btn {
+    width: 44px; height: 44px;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(18% 0%, 100% 50%, 18% 100%);
+    margin-left: 5px;
+  }
+  .p-play-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .p-cat {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    z-index: 2;
+    line-height: 1.4;
+  }
+  /* Duration badge */
+  .p-dur {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 2px 7px;
+    z-index: 2;
+    letter-spacing: .06em;
+  }
+  .p-info { padding: 10px 12px 14px; }
+  .p-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .p-desc {
+    font-size: 11px;
+    color: var(--warm-gray);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: .04em;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    .portfolio-item:nth-child(4n) { border-right: 1px solid var(--ink); }
+    .portfolio-item:nth-child(2n) { border-right: none; }
+    .portfolio-item:nth-last-child(-n+4) { border-bottom: 1px solid var(--ink); }
+    .portfolio-item:nth-last-child(-n+2) { border-bottom: none; }
+  }
+  @media (max-width: 600px) {
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin: 20px 0;
+  }
+  .testi-card {
+    padding: 22px 20px;
+    border-right: 1px solid var(--ink);
+    position: relative;
+  }
+  .testi-card:last-child { border-right: none; }
+  .testi-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--red);
+    opacity: .2;
+    line-height: 1;
+    position: absolute;
+    top: 10px; right: 16px;
+  }
+  .testi-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+    color: #1a1a1a;
+  }
+  .testi-author {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+  .testi-author strong { color: var(--ink); display: block; margin-bottom: 2px; }
+  .stars { color: var(--red); letter-spacing: 2px; font-size: 11px; margin-bottom: 8px; }
+
+  /* ── TWO-COL SECTION ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 36px;
+  }
+  .two-col > div {
+    padding: 20px var(--col-gap) 24px 0;
+    border-right: 1px solid var(--ink);
+  }
+  .two-col > div:last-child {
+    border-right: none;
+    padding-left: var(--col-gap);
+    padding-right: 0;
+  }
+
+  /* ── CONTACT ── */
+  .contact-band {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 40px;
+    margin: 36px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .contact-band h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .contact-band h2 em { font-style: italic; color: var(--red); }
+  .contact-items { display: flex; flex-direction: column; gap: 14px; }
+  .contact-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #333;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-item .ci-icon { font-size: 18px; flex-shrink: 0; }
+  .contact-item .ci-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 2px;
+  }
+  .contact-item .ci-val {
+    font-size: 14px;
+    color: var(--cream);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 3px double var(--cream);
+    color: var(--warm-gray);
+    text-align: center;
+    padding: 14px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+  footer strong { color: var(--cream); }
+
+  /* ── DIVIDER ── */
+  .col-rule {
+    border: none;
+    border-top: 1px solid var(--ink);
+    margin: 18px 0;
+  }
+
+  /* ── VIDEO EMBED PLACEHOLDER ── */
+  .video-block {
+    background: #111;
+    border: 2px solid var(--ink);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .video-block:hover { border-color: var(--red); }
+  .video-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,.015) 3px,
+      rgba(255,255,255,.015) 6px
+    );
+  }
+  .play-btn {
+    width: 54px; height: 54px;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    clip-path: polygon(15% 0%, 100% 50%, 15% 100%);
+    margin-left: 6px;
+  }
+  .video-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #888;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Media fills exact 9:16 frame */
+  .p-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    display: block;
+  }
+  .p-placeholder-icon {
+    position: relative;
+    z-index: 0;
+    font-size: 36px;
+    opacity: .35;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    width: min(380px, 90vw);
+    aspect-ratio: 9/16;
+    background: #000;
+  }
+  .lightbox-inner video,
+  .lightbox-inner iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .1em;
+    padding: 7px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  /* ── SLIDESHOW ── */
+  .slideshow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide img, .slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .slide-dots {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 4;
+  }
+  .slide-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.4);
+    transition: background .3s;
+  }
+  .slide-dot.active { background: #fff; }
+
+  /* Profile slideshow */
+  .profile-slideshow {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    border: 2px solid var(--ink);
+    overflow: hidden;
+    background: linear-gradient(135deg, #d4cfc6 0%, #b8b2a8 100%);
+    margin-bottom: 12px;
+  }
+  .profile-slideshow .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-slideshow .slide-dots { bottom: 8px; }
+  .profile-ph {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; z-index: 0;
+  }
+  .profile-ph::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);
+  }
+  .profile-ph .ph-icon { font-size:48px; opacity:.35; position:relative; z-index:1; }
+  .profile-ph .ph-label { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); opacity:.5; margin-top:8px; position:relative; z-index:1; }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr 1fr; }
+    .hero-main { grid-row: 1; grid-column: 1/3; border-right: none; border-bottom: 1px solid var(--ink); padding: 0 0 20px; }
+    .hero-side-top, .hero-side-bottom, .hero-far-top, .hero-far-bottom { border-right: none; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .service-card:nth-child(2) { border-right: none; }
+    .service-card:nth-child(1), .service-card:nth-child(2) { border-bottom: 1px solid var(--ink); }
+    .testimonials-strip { grid-template-columns: 1fr; }
+    .testi-card { border-right: none; border-bottom: 1px solid var(--ink); }
+    .two-col { grid-template-columns: 1fr; }
+    .two-col > div { border-right: none; padding-left: 0; padding-right: 0; border-bottom: 1px solid var(--ink); }
+    .contact-band { grid-template-columns: 1fr; padding: 28px 20px; }
+  }
+  @media (max-width: 600px) {
+    .paper { padding: 0 14px; }
+    .masthead { padding: 14px 14px 10px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { border-right: none; border-bottom: 1px solid var(--ink); }
+    nav a { padding: 8px 12px; font-size: 9.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-inner { animation: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-bar" aria-label="Skills ticker">
+  <div class="ticker-inner">
+    <span>Social Media Management <span class="dot">◆</span></span>
+    <span>Video Editing <span class="dot">◆</span></span>
+    <span>Motion Graphics <span class="dot">◆</span></span>
+    <span>SEO Strategy <span class="dot">◆</span></span>
+    <span>Brand Photography <span class="dot">◆</span></span>
+    <span>Model Shoots <span class="dot">◆</span></span>
+    <span>Content Strategy <span class="dot">◆</span></span>
+    <span>Instagram Reels <span class="dot">◆</span></span>
+    <span>YouTube Shorts <span class="dot">◆</span></span>
+    <span>Facebook Reels <span class="dot">◆</span></span>
+    <!-- duplicate for seamless loop -->
+    <span>Social Media Management <span class="dot">◆</span></span>
+    <span>Video Editing <span class="dot">◆</span></span>
+    <span>Motion Graphics <span class="dot">◆</span></span>
+    <span>SEO Strategy <span class="dot">◆</span></span>
+    <span>Brand Photography <span class="dot">◆</span></span>
+    <span>Model Shoots <span class="dot">◆</span></span>
+    <span>Content Strategy <span class="dot">◆</span></span>
+    <span>Instagram Reels <span class="dot">◆</span></span>
+    <span>YouTube Shorts <span class="dot">◆</span></span>
+    <span>Facebook Reels <span class="dot">◆</span></span>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="paper">
+    <p class="masthead-tagline">Est. 2021 — Creative Director &amp; Digital Strategist</p>
+    <h1 class="masthead-title">The Creative <em>Dispatch</em></h1>
+    <p class="masthead-sub">Mohammad Amaan Siddiqui — Social · Video · Photo · SEO</p>
+    <div class="masthead-meta">
+      <span>Vol. IV, No. 27</span>
+      <span class="edition">★ Portfolio Edition ★</span>
+      <span>Available for Projects — New Delhi, IN</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#video">Video Reel</a>
+  <a href="#testimonials">Press &amp; Reviews</a>
+  <a href="#contact">Hire Me</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="paper">
+
+  <!-- ── FRONT PAGE HERO ── -->
+  <section id="about">
+    <div class="section-head reveal">
+      <h2>Front Page</h2>
+      <div class="rule-line"></div>
+      <span class="dateline">Today's Edition</span>
+    </div>
+
+    <div class="hero-grid reveal">
+      <!-- Main story -->
+      <div class="hero-main">
+        <span class="eyebrow">Cover Story</span>
+        <h2 class="headline-xl">Freelancer Turns <em>Brands Into Stories</em> Worth Telling</h2>
+        <p class="byline">By <strong>The Editorial Desk</strong> &nbsp;·&nbsp; Social Media · Motion · Photo · SEO</p>
+        <div class="body-copy">
+          <p>In a digital landscape glutted with noise, one creative professional has been quietly building something rarer: content that actually stops the scroll. Mohammad Amaan Siddiqui, a New Delhi-based creative director, works at the intersection of social media strategy, video production, and visual storytelling — delivering a full-service creative pipeline for brands that demand more than the ordinary.</p>
+          <p>Whether it's a punchy 30-second Reel engineered for virality, a brand photo shoot that turns product into personality, or an SEO strategy that makes sure the right people find you — every deliverable is built with intent, precision, and an editorial eye honed over years of hands-on work.</p>
+          <p>"Every brand has a story worth telling," says Amaan. "My job is to figure out what that story is — and then make sure the world sees it."</p>
+        </div>
+        <div class="pull-quote">
+          <blockquote>"I don't just make content. I build the kind of presence that makes people come back."</blockquote>
+          <cite>— Mohammad Amaan Siddiqui, Creative Director &amp; Founder</cite>
+        </div>
+        <div class="body-copy">
+          <p>With experience spanning electrical engineering and now full-spectrum digital production, Amaan brings an uncommonly systematic approach to creative work: every post is tested, every sequence is optimised, and every photo is composed with both aesthetics and algorithm in mind.</p>
+        </div>
+      </div>
+
+      <!-- Side col 1 -->
+      <div class="hero-side-top">
+        <span class="eyebrow">In Brief</span>
+        <div class="profile-slideshow" id="profile-slideshow">
+          <div class="slide active"><img src="media/image.png" alt="Amaan">
+            </div>
+          <!-- PROFILE PHOTOS — add up to 3 images below, uncomment each line -->
+          <!-- <div class="slide"><img src="media/profile1.jpg" alt="Amaan"></div> -->
+          <!-- <div class="slide"><img src="media/profile2.jpg" alt="Amaan"></div> -->
+          <!-- <div class="slide"><img src="media/profile3.jpg" alt="Amaan"></div> -->
+          <!-- Placeholder shown when no images added yet -->
+         
+          <div class="slide-dots" id="profile-dots"></div>
+        </div>
+        <p class="caption">AMAAN SIDDIQUI — Creative &amp; Digital Strategist, available for freelance worldwide.</p>
+      </div>
+      <div class="hero-side-bottom">
+        <div class="stat-box">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="stat-box" style="margin-top:10px; background: var(--red);">
+          <div class="stat-num" style="color: var(--cream);">4+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+
+      <!-- Far col 2 -->
+      <div class="hero-far-top">
+        <span class="eyebrow">Latest</span>
+        <h3 class="headline-md">Motion Graphics Now Offered for Reels &amp; Shorts</h3>
+        <p class="body-copy" style="font-size:13px;">Custom animated overlays, kinetic titles, and branded transitions — ready to drop directly into your social workflow.</p>
+        <hr class="col-rule">
+        <h3 class="headline-md">Brand Shoots Now Bookable for Q3 2025</h3>
+        <p class="body-copy" style="font-size:13px;">Full-day studio and on-location packages, including model coordination, styling guidance, and same-week delivery.</p>
+      </div>
+      <div class="hero-far-bottom">
+        <span class="eyebrow">Quick Stats</span>
+        <table style="width:100%; font-family:'IBM Plex Mono', monospace; font-size:10.5px; border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #ddd">
+            <td style="padding:5px 0; color:var(--warm-gray)">Platforms</td>
+            <td style="text-align:right; font-weight:500;">IG · YT · FB</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ddd">
+            <td style="padding:5px 0; color:var(--warm-gray)">Turnaround</td>
+            <td style="text-align:right; font-weight:500;">48 – 72 hrs</td>
+          </tr>
+          <tr style="border-bottom:1px solid #ddd">
+            <td style="padding:5px 0; color:var(--warm-gray)">Photo Edit</td>
+            <td style="text-align:right; font-weight:500;">24 hrs</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 0; color:var(--warm-gray)">Availability</td>
+            <td style="text-align:right; color:var(--red); font-weight:500;">Open ✓</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="section-head reveal">
+      <h2>Services Index</h2>
+      <div class="rule-line"></div>
+      <span class="dateline">Full-Service Creative</span>
+    </div>
+
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <span class="service-icon">📱</span>
+        <span class="service-num">§ 01</span>
+        <div class="service-title">Social Media Management</div>
+        <p class="service-body">End-to-end management of Instagram, YouTube, and Facebook — including strategy, scheduling, copywriting, hashtag research, and analytics reporting.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎬</span>
+        <span class="service-num">§ 02</span>
+        <div class="service-title">Video Editing &amp; Reels</div>
+        <p class="service-body">Long-form and short-form video editing, colour grading, sound design, captions, and platform-native cuts for Instagram Reels, YouTube Shorts, and Facebook Reels.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">✦</span>
+        <span class="service-num">§ 03</span>
+        <div class="service-title">Motion Graphics</div>
+        <p class="service-body">Animated intros, kinetic text, branded overlays, lower thirds, and logo stings — motion that elevates every frame.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔍</span>
+        <span class="service-num">§ 04</span>
+        <div class="service-title">SEO Strategy</div>
+        <p class="service-body">Keyword research, on-page optimisation, content calendars built for discovery, and performance tracking to grow organic reach.</p>
+      </div>
+    </div>
+
+    <div class="services-grid reveal" style="margin-top:0; border-top:none;">
+      <div class="service-card">
+        <span class="service-icon">📸</span>
+        <span class="service-num">§ 05</span>
+        <div class="service-title">Brand Photo Shoots</div>
+        <p class="service-body">Studio and on-location brand photography — products, campaigns, and editorial content that speaks the language of your audience.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌟</span>
+        <span class="service-num">§ 06</span>
+        <div class="service-title">Influencer &amp; UGC Content</div>
+        <p class="service-body">Authentic, platform-native content creation for influencer partnerships, sponsored posts, and user-generated content campaigns.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎨</span>
+        <span class="service-num">§ 07</span>
+        <div class="service-title">Creative Direction</div>
+        <p class="service-body">Concept development, mood boarding, and art direction for cohesive campaigns that maintain brand identity across every touchpoint.</p>
+      </div>
+      <div class="service-card" style="border-right:none; opacity:.35; pointer-events:none;">
+        <!-- empty slot keeps 4-col grid balanced -->
+      </div>
+    </div>
+  </section>
+
+<!-- ── ORIGINAL MUSIC ── -->
+<section id="music">
+    <div class="section-head reveal">
+        <h2>Original Music</h2>
+        <div class="rule-line"></div>
+        <span class="dateline">Beyond Creative Work</span>
+    </div>
+
+    <div class="two-col reveal">
+
+        <!-- LEFT -->
+        <div>
+
+            <span class="eyebrow">Featured Release</span>
+
+            <h3 class="headline-lg">
+                Creativity Doesn't End When The Camera Stops Rolling
+            </h3>
+
+            <p class="body-copy" style="margin-bottom:16px;">
+                While most people know me as a social media manager, filmmaker, and creative strategist,
+                music has always been another part of who I am. I enjoy writing lyrics, experimenting with
+                melodies, and creating music that tells stories just as powerfully as visuals do.
+                This is one of my original releases.
+            </p>
+
+            <div class="video-block">
+
+                <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/MpkaEUSwfMA"
+                    title="Original Music"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    style="position:absolute; inset:0;">
+                </iframe>
+
+            </div>
+
+            <p class="caption">
+                Original Song • Written & Performed by Mohammad Amaan Siddiqui
+            </p>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div>
+
+            <span class="eyebrow">Editorial Note</span>
+
+            <h3 class="headline-lg">
+                Every Creative Passion Shapes My Work
+            </h3>
+
+            <div class="body-copy">
+
+                <p>
+                    Creativity isn't something I switch on only for clients. Whether I'm filming travel stories,
+                    directing brand campaigns, editing cinematic reels, capturing photographs, or producing music,
+                    every project teaches me something new.
+                </p>
+
+                <div class="pull-quote" style="margin:22px 0;">
+                    <blockquote>
+                        "The best ideas come from creating for yourself first."
+                    </blockquote>
+                    <cite>— Mohammad Amaan Siddiqui</cite>
+                </div>
+
+                <p>
+                    Music has strengthened my sense of rhythm, emotion, storytelling, and pacing—skills that
+                    naturally translate into better video editing, stronger visual narratives, and more engaging
+                    content for every brand I work with.
+                </p>
+
+                <p>
+                    To me, creativity isn't a profession—it's a way of life.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+  <!-- ── PORTFOLIO ── -->
+  <section id="portfolio">
+    <div class="section-head reveal">
+      <h2>Portfolio — Selected Works</h2>
+      <div class="rule-line"></div>
+      <span class="dateline">Photography · Video · Motion</span>
+    </div>
+
+    <div class="portfolio-grid reveal">
+
+      <!-- ══ CARD 1 — Brand Shoot ══
+           Add 2–3 images or videos. Uncomment each <div class="slide"> you want to use.
+           Images: <img src="media/brand1a.jpg">
+           Videos: <video src="media/brand1a.mp4" muted playsinline></video>  -->
+      <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#1a1a2e,#4a2040);">
+          <div class="slideshow" data-interval="3000">
+            <div class="slide active"><video  src="media/efflair.mp4" alt="Brand Shoot 1" autoplay muted loop playsinline>
+              </video></div>
+            <div class="slide"><video src="media/jewlryfinal.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/sharda2.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/kidsland.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <!-- <div class="slide"><img src="media/brand1b.jpg" alt="Brand Shoot 2"></div> -->
+            <!-- <div class="slide"><video src="media/brand1c.mp4" muted playsinline></video></div> -->
+          </div>
+          <div class="p-cat">Brand Shoot</div>
+          <div class="p-dur">0:45</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">📦</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Product Campaign Reel</div>
+          <div class="p-desc">F&amp;B Brand · Studio · IG Reels</div>
+        </div>
+      </div>
+
+      <!-- ══ CARD 2 — Fashion Editorial ══ -->
+      <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#2a1010,#7a3030);">
+          <div class="slideshow" data-interval="3000">
+            <div class="slide active"><video src="media/model1.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/neha.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/susnsnda.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <!-- <div class="slide"><img src="media/fashion2a.jpg" alt="Fashion 1"></div> -->
+            <!-- <div class="slide"><img src="media/fashion2b.jpg" alt="Fashion 2"></div> -->
+            <!-- <div class="slide"><video src="media/fashion2c.mp4" muted playsinline></video></div> -->
+          </div>
+          <div class="p-cat">Fashion Editorial</div>
+          <div class="p-dur">0:30</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">👗</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Fashion Editorial Reel</div>
+          <div class="p-desc">Apparel Label · On-Location · FB Reels</div>
+        </div>
+      </div>
+
+      <!-- ══ CARD 3 — Motion Graphics ══ -->
+      <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#0a1a2a,#1a3a5a);">
+          <div class="slideshow" data-interval="3000">
+            <div class="slide active"><video src="media/motion2.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/motion1.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/motion3.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <!-- <div class="slide"><video src="media/motion3a.mp4" muted playsinline></video></div> -->
+            <!-- <div class="slide"><video src="media/motion3b.mp4" muted playsinline></video></div> -->
+            <!-- <div class="slide"><img src="media/motion3c.jpg" alt="Motion frame"></div> -->
+          </div>
+          <div class="p-cat">Motion Graphics</div>
+          <div class="p-dur">0:20</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">✦</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Animated Brand Sting</div>
+          <div class="p-desc">Logo · Kinetic Type · YT Shorts</div>
+        </div>
+      </div>
+
+      <!-- ══ CARD 4 — Social Media ══ -->
+      <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#102010,#1a5a2a);">
+          <div class="slideshow" data-interval="3000">
+            <div class="slide active"><img src="media/social.png" alt="Social 1"></div>
+            
+            <!-- <div class="slide"><img src="media/social4a.jpg" alt="Social 1"></div> -->
+            <!-- <div class="slide"><img src="media/social4b.jpg" alt="Social 2"></div> -->
+            <!-- <div class="slide"><video src="media/social4c.mp4" muted playsinline></video></div> -->
+          </div>
+          <div class="p-cat">Social Media</div>
+          <div class="p-dur">1:00</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">📱</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Content Strategy Reel</div>
+          <div class="p-desc">Growth +240% · IG · FB Reels</div>
+        </div>
+      </div>
+
+      <!-- ══ CARD 5 — Video Editing ══ -->
+      <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#2a1a0a,#6a3a10);">
+          <div class="slideshow" data-interval="3000">
+            <div class="slide active"><video src="media/detail.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/edit2.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <div class="slide"><video src="media/sashat final.mp4" alt="Brand Shoot 2" autoplay muted loop playsinline></video>
+            </div>
+            <!-- <div class="slide"><video src="media/video5a.mp4" muted playsinline></video></div> -->
+            <!-- <div class="slide"><video src="media/video5b.mp4" muted playsinline></video></div> -->
+            <!-- <div class="slide"><img src="media/video5c.jpg" alt="Video frame"></div> -->
+          </div>
+          <div class="p-cat">Video Editing</div>
+          <div class="p-dur">0:30</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">🎬</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Product Launch Reel</div>
+          <div class="p-desc">Colour Grade · SFX · YT Shorts</div>
+        </div>
+      </div>
+
+      <!-- ══ CARD 6 — Brand Portrait ══ -->
+      <!-- <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#1a0a2a,#4a1a6a);">
+          <div class="slideshow" data-interval="3000"> -->
+            <!-- <div class="slide"><img src="media/portrait6a.jpg" alt="Portrait 1"></div> -->
+            <!-- <div class="slide"><img src="media/portrait6b.jpg" alt="Portrait 2"></div> -->
+            <!-- <div class="slide"><img src="media/portrait6c.jpg" alt="Portrait 3"></div> -->
+          <!-- </div>
+          <div class="p-cat">Photo Shoot</div>
+          <div class="p-dur">0:45</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">📸</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Brand Portrait Reel</div>
+          <div class="p-desc">Executive · Lifestyle · IG Reels</div>
+        </div>
+      </div> -->
+
+      <!-- ══ CARD 7 — SEO Content ══ -->
+      <!-- <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#1a1510,#4a3a20);">
+          <div class="slideshow" data-interval="3000"> -->
+            <!-- <div class="slide"><img src="media/seo7a.jpg" alt="SEO 1"></div> -->
+            <!-- <div class="slide"><video src="media/seo7b.mp4" muted playsinline></video></div> -->
+            <!-- <div class="slide"><img src="media/seo7c.jpg" alt="SEO 3"></div> -->
+          <!-- </div>
+          <div class="p-cat">SEO Content</div>
+          <div class="p-dur">1:00</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">🔍</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">SEO Campaign Reel</div>
+          <div class="p-desc">Organic Growth · YT Shorts · FB</div>
+        </div>
+      </div> -->
+
+      <!-- ══ CARD 8 — Creative Direction ══ -->
+      <!-- <div class="portfolio-item" onclick="openLightbox(this)">
+        <div class="p-thumb" style="background:linear-gradient(160deg,#0a1a1a,#1a4a4a);">
+          <div class="slideshow" data-interval="3000"> -->
+            <!-- <div class="slide"><video src="media/creative8a.mp4" muted playsinline></video></div> -->
+            <!-- <div class="slide"><img src="media/creative8b.jpg" alt="Creative 2"></div> -->
+            <!-- <div class="slide"><video src="media/creative8c.mp4" muted playsinline></video></div> -->
+          <!-- </div>
+          <div class="p-cat">Creative Direction</div>
+          <div class="p-dur">1:00</div>
+          <div class="p-play-overlay"><div class="p-play-btn"></div><span class="p-play-label">View</span></div>
+          <span class="p-placeholder-icon">🎨</span>
+          <div class="slide-dots"></div>
+        </div>
+        <div class="p-info">
+          <div class="p-title">Campaign Direction Reel</div>
+          <div class="p-desc">Full Campaign · Multi-Platform</div>
+        </div>
+      </div> -->
+
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section id="testimonials">
+    <div class="section-head reveal">
+      <h2>Press &amp; Client Reviews</h2>
+      <div class="rule-line"></div>
+      <span class="dateline">Verified Feedback</span>
+    </div>
+
+    <div class="testimonials-strip reveal">
+      <div class="testi-card">
+        <div class="testi-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Amaan completely transformed our Instagram presence. In three months, our engagement tripled and we started getting DMs from customers saying they found us through Reels. The content feels genuinely us.</p>
+        <div class="testi-author">
+          <strong>Priya M.</strong>
+          Founder, Lifestyle Brand · Mumbai
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">The product shoot exceeded every expectation. Amaan understood the aesthetic immediately — minimal, premium, story-driven. The photos went straight into our new catalogue and website hero.</p>
+        <div class="testi-author">
+          <strong>Rahul K.</strong>
+          Creative Lead, D2C Brand · Delhi
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-mark">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Fast, professional, and creatively sharp. The motion graphics package he delivered for our launch made our content look like a major agency produced it. Will absolutely hire again.</p>
+        <div class="testi-author">
+          <strong>Sara A.</strong>
+          Marketing Manager · Startup, Bengaluru
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal">
+      <blockquote>"Working with Amaan felt like having an in-house creative director — the results speak for themselves."</blockquote>
+      <cite>— Client, Fashion E-commerce Brand</cite>
+    </div>
+  </section>
+
+</main>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="paper">
+    <div class="section-head reveal">
+      <h2>Commission Desk</h2>
+      <div class="rule-line"></div>
+      <span class="dateline">Get in Touch</span>
+    </div>
+  </div>
+  <div class="contact-band reveal">
+    <div>
+      <h2>Let's Make <em>Something Worth</em> Publishing.</h2>
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--warm-gray); margin-top:14px; line-height:1.7;">Open for new projects — brand shoots, video edits, social media retainers, and motion graphics. Reach out and let's talk about what you need.</p>
+      <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="mailto:amaansiddiqui.dev@gmail.com" style="background:var(--red); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:12px 22px; text-decoration:none; transition:background .2s;" onmouseover="this.style.background='#a93226'" onmouseout="this.style.background='var(--red)'">Send an Enquiry →</a>
+        <a href="https://instagram.com/desipassportt" target="_blank" style="border:1px solid #555; color:var(--cream); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:12px 22px; text-decoration:none; transition:border-color .2s;" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='#555'">View Instagram ↗</a>
+      </div>
+    </div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="ci-icon">📧</div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-val">amaansiddiqui.dev@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">📱</div>
+        <div>
+          <div class="ci-label">WhatsApp / Phone</div>
+          <div class="ci-val">+91 79064 78405</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">Location</div>
+          <div class="ci-val">New Delhi, India — Available Worldwide</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-icon">🕐</div>
+        <div>
+          <div class="ci-label">Response Time</div>
+          <div class="ci-val">Usually within 24 hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <div class="lightbox-inner" id="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>The Creative Dispatch</strong> &nbsp;·&nbsp; Mohammad Amaan Siddiqui &nbsp;·&nbsp; Creative Portfolio &nbsp;·&nbsp; © 2025 &nbsp;·&nbsp; All Rights Reserved
+</footer>
+
+<script>
+  // Reel lightbox
+  function openReel(src) {
+    const lb = document.getElementById('lightbox');
+    const inner = document.getElementById('lightbox-inner');
+    // Remove old media
+    inner.querySelectorAll('video, iframe').forEach(el => el.remove());
+    if (src.includes('youtube.com') || src.includes('youtu.be')) {
+      const id = src.split('v=')[1] || src.split('/').pop();
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      iframe.frameBorder = '0';
+      inner.appendChild(iframe);
+    } else {
+      const video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      inner.appendChild(video);
+    }
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('active');
+    lb.querySelectorAll('video, iframe').forEach(el => el.remove());
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => io.observe(el));
+
+  // Smooth scroll for nav
+  document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+<script>
+
+document.querySelectorAll('.slideshow').forEach(slideshow => {
+
+    const slides = slideshow.querySelectorAll('.slide');
+
+    if (slides.length <= 1) return;
+
+    let current = 0;
+
+    // Only first slide should be active
+
+    slides.forEach((slide, index) => {
+
+        slide.classList.toggle('active', index === 0);
+
+    });
+
+    function nextSlide() {
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+
+    }
+
+    setInterval(nextSlide, 3000);
+
+});
+
+</script>
+</body>
+</html>
